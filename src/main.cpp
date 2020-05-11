@@ -1,4 +1,4 @@
-﻿#include "include/AbstractStrategy.h"
+#include "include/AbstractStrategy.h"
 #include "include/FolderGrouping.h"
 #include "include/TypeGrouping.h"
 #include <QApplication>
