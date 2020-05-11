@@ -17,14 +17,16 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(project_headers 
 	include/AbstractStrategy.h
+	include/Configuration.h
 	include/FolderGrouping.h
+	include/TypeGrouping.h
 )
 
 set(project_sources 
 	src/main.cpp
 	src/FolderGrouping.cpp
+	src/TypeGrouping.cpp
 )
-
 
 add_executable(${PROJECT_NAME}
 	${project_headers}
