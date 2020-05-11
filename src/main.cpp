@@ -1,4 +1,4 @@
-#include "include/AbstractStrategy.h"
+#include "include/StrategyManagement.h"
 #include "include/FolderGrouping.h"
 #include "include/TypeGrouping.h"
 #include <QApplication>
@@ -9,19 +9,16 @@ int main(int argc, char* argv[])
 {
 	QApplication a(argc, argv);
 
-	AbstractStrategy* abstractStrategy = new FolderGrouping;
-	abstractStrategy->explorer(QDir::currentPath());
+#ifdef _DEBUG
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
 
-	QTextStream(stdout) << "\n" << flush;
+	StrategyManagement* strategyManagement = new StrategyManagement(new FolderGrouping);
+	strategyManagement->doIt(QDir::currentPath());
+	strategyManagement->setStrategy(new TypeGrouping);
+	strategyManagement->doIt(QDir::currentPath());
 
-	delete abstractStrategy;
+	delete strategyManagement;
 
-	abstractStrategy = new TypeGrouping;
-	abstractStrategy->explorer(QDir::currentPath());
-
-	delete abstractStrategy;
-
-	QApplication::exec();
-
-	return 0;
+	return QApplication::exec();
 }
