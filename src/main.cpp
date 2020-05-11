@@ -13,6 +13,5 @@ int main(int argc, char* argv[])
 
 	QCoreApplication::exec();
 
-
 	return 0;
 }

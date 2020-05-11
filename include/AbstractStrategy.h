@@ -7,5 +7,5 @@ class AbstractStrategy
 public:
     explicit AbstractStrategy() = default;
     virtual ~AbstractStrategy() = default;
-    virtual void* explorer(const QString& path) = 0;
+    virtual bool explorer(const QString& path) = 0;
 };

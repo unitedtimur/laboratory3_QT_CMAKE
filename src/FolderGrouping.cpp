@@ -3,47 +3,73 @@
 #include <QFileInfo>
 #include <QDebug>
 
-FolderGrouping::FolderGrouping() : 
-	cin(new QTextStream),
-	cout(new QTextStream)
+FolderGrouping::FolderGrouping()
 {
 }
 
 FolderGrouping::~FolderGrouping()
 {
-	delete cin;
-	delete cout;
+
 }
 
-void* FolderGrouping::explorer(const QString& path)
+bool FolderGrouping::explorer(const QString& path)
 {
 	QFileInfo file(path);
 
 	if (!file.exists() && !file.isReadable())
-		return nullptr;
+		return false;
 
-	if (file.isDir())
-	{
-		quint64 totalSize = TotalSize().get(file.absoluteFilePath());
+	const auto absolutePath = file.absoluteFilePath();
+	const auto totalSize = this->getTotalSize(absolutePath);
+	const auto filesAndFoldersList = this->getFilesAndFolders(absolutePath);
+	const auto filesAndFoldersListPercentage = this->getInformationPercentageOfTotal(totalSize, filesAndFoldersList);
+	this->printInformationPercentageOfTotal(filesAndFoldersListPercentage);	
 
-		qDebug() << totalSize;
-
-
-		for (const auto& it : QDir(file.absoluteFilePath()).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot))
-		{
-
-		}
-	}
-
-	return nullptr;
+	return true;
 }
 
-quint64 FolderGrouping::totalSize(const QString& path) noexcept
+qint64 FolderGrouping::getTotalSize(const QString& path) const noexcept
 {
-	static quint64 totalSize = 0;
+	auto totalSize = QFileInfo(path).size();
 
-	for (const auto& it : QDir(path).entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot))
-		(it.isDir() /*&& !it.isSymLink()*/) ? this->totalSize(it.absoluteFilePath()) : totalSize += it.size();
+	QDir directory(path);
+
+	for (const auto& it : directory.entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Hidden))
+		(it.isDir() && !it.isSymLink()) ? totalSize += this->getTotalSize(it.absoluteFilePath()) : totalSize += it.size();
 
 	return totalSize;
+}
+
+QMap<QString, qint64> FolderGrouping::getFilesAndFolders(const QString& path) const noexcept
+{
+	QMap<QString, qint64> filesAndFoldersList;
+
+	for (const auto& it : QDir(path).entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Hidden))
+	{
+		const auto absolutePath = it.absoluteFilePath();
+		filesAndFoldersList.insert(absolutePath, getTotalSize(absolutePath));
+	}
+
+	return filesAndFoldersList;
+}
+
+QMap<QString, double> FolderGrouping::getInformationPercentageOfTotal(const qint64& totalSize, const QMap<QString, qint64>& filesAndFoldersList) const noexcept
+{
+	QMap<QString, double> filesAndFoldersListPercentage;
+
+	for (auto it = filesAndFoldersList.begin(); it != filesAndFoldersList.end(); ++it)
+	{
+		const auto percentageOfTotal = double(it.value() * 100) / totalSize;
+		filesAndFoldersListPercentage.insert(it.key(), percentageOfTotal);
+	}
+
+	return filesAndFoldersListPercentage;
+}
+
+void FolderGrouping::printInformationPercentageOfTotal(const QMap<QString, double>& filesAndFoldersList) const noexcept
+{
+	QTextStream cout(stdout);
+
+	for (auto it = filesAndFoldersList.begin(); it != filesAndFoldersList.end(); ++it)
+		cout << it.key() << " " << it.value() << "%" << endl;
 }
