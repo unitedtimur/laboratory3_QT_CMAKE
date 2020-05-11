@@ -1,0 +1,40 @@
+﻿cmake_minimum_required(VERSION 3.15)
+
+project(Laboratory3 VERSION 1.0.0 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDART 17)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+#Чтобы найти пакеты Qt5
+set(CMAKE_PREFIX_PATH "C:\\Qt\\5.14.2\\msvc2017_64\\lib\\cmake")
+
+find_package(Qt5 COMPONENTS Core Gui Widgets Qt5Charts_VERSION REQUIRED)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+set(project_headers 
+	include/AbstractStrategy.h
+	include/Explorer.h
+	include/FolderGrouping.h
+)
+
+set(project_sources 
+	src/main.cpp
+	src/Explorer.cpp
+	src/FolderGrouping.cpp
+)
+
+add_executable(${PROJECT_NAME}
+	${project_headers}
+	${project_sources}
+)
+
+target_link_libraries(${PROJECT_NAME} 
+	PUBLIC 
+	Qt5::Core
+	Qt5::Gui
+	Qt5::Widgets
+)
