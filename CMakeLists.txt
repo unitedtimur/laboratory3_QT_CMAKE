@@ -20,12 +20,14 @@ set(project_headers
 	include/Configuration.h
 	include/FolderGrouping.h
 	include/TypeGrouping.h
+	include/StrategyManagement.h
 )
 
 set(project_sources 
 	src/main.cpp
 	src/FolderGrouping.cpp
 	src/TypeGrouping.cpp
+	src/StrategyManagement.cpp
 )
 
 add_executable(${PROJECT_NAME}
