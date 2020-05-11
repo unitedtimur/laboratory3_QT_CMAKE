@@ -1,16 +1,7 @@
 #include "include/FolderGrouping.h"
 #include <QTextStream>
 #include <QFileInfo>
-#include <QDebug>
-
-FolderGrouping::FolderGrouping()
-{
-}
-
-FolderGrouping::~FolderGrouping()
-{
-
-}
+#include <QDir>
 
 bool FolderGrouping::explorer(const QString& path)
 {

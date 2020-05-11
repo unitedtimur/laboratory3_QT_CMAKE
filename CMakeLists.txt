@@ -9,7 +9,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 #Чтобы найти пакеты Qt5
-set(CMAKE_PREFIX_PATH "C:\\Qt\\5.14.2\\mingw73_64")
+#set(CMAKE_PREFIX_PATH "C:\\Qt\\5.14.2\\mingw73_64")
 
 find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
 
@@ -17,13 +17,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(project_headers 
 	include/AbstractStrategy.h
-	include/Explorer.h
 	include/FolderGrouping.h
 )
 
 set(project_sources 
 	src/main.cpp
-	src/Explorer.cpp
 	src/FolderGrouping.cpp
 )
 

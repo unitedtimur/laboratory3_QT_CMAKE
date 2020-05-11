@@ -1,5 +1,4 @@
-﻿#include "include/Explorer.h"
-#include "include/FolderGrouping.h"
+﻿#include "include/FolderGrouping.h"
 #include <QApplication>
 #include <QDir>
 

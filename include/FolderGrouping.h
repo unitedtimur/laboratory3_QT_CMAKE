@@ -1,18 +1,12 @@
 ﻿#pragma once
 
 #include "include/AbstractStrategy.h"
-#include <QDir>
-
-/*
- * Forward declaration
- */
-class QTextStream;
 
 class FolderGrouping final : public AbstractStrategy
 {
 public:
-	explicit FolderGrouping();
-	virtual ~FolderGrouping() override;
+	explicit FolderGrouping() = default;
+	virtual ~FolderGrouping() override = default;
 	bool explorer(const QString& path) override;
 
 private:
