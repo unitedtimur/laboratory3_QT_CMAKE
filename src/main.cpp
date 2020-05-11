@@ -7,8 +7,7 @@ int main(int argc, char* argv[])
 	QApplication a(argc, argv);
 
 	FolderGrouping folderGrouping;
-	folderGrouping.explorer(QDir::currentPath());
-
+	folderGrouping.explorer("E:\\");
 
 	QCoreApplication::exec();
 

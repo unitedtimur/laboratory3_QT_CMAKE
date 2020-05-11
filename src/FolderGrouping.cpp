@@ -38,7 +38,7 @@ QMap<QString, qint64> FolderGrouping::getFilesAndFolders(const QString& path) co
 	for (const auto& it : QDir(path).entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Hidden))
 	{
 		const auto absolutePath = it.absoluteFilePath();
-		filesAndFoldersList.insert(absolutePath, getTotalSize(absolutePath));
+		filesAndFoldersList.insert(absolutePath, this->getTotalSize(absolutePath));
 	}
 
 	return filesAndFoldersList;
