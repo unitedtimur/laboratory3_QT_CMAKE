@@ -8,12 +8,17 @@ namespace Configuration
 {
 	inline static qint64 GetTotalSize(const QString& path)
 	{
-		auto totalSize = 0;
+		qint64 totalSize = 0;
 
-		QDir directory(path);
+		if (QFileInfo(path).isDir())
+		{
+			QDir directory(path);
 
-		for (const auto& it : directory.entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Hidden, QDir::Name | QDir::Type))
-			(it.isDir() && !it.isSymLink()) ? totalSize += GetTotalSize(it.absoluteFilePath()) : totalSize += it.size();
+			for (const auto& it : directory.entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Hidden, QDir::Name | QDir::Type))
+				(it.isDir() && !it.isSymLink()) ? totalSize += GetTotalSize(it.absoluteFilePath()) : totalSize += it.size();
+		}
+		else
+			totalSize += QFileInfo(path).size();
 
 		return totalSize;
 	}

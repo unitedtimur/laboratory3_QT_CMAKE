@@ -4,7 +4,7 @@
 #include <QApplication>
 #include <QDir>
 #include <QTextStream>
-
+#include <QDebug>
 int main(int argc, char* argv[])
 {
 	QApplication a(argc, argv);

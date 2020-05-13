@@ -17,20 +17,25 @@ bool FolderGrouping::explorer(const QString& path)
 	return true;
 }
 
-QMap<QString, qint64> FolderGrouping::getFilesAndFolders(const QString& path) const noexcept
+QMap<QString, double> FolderGrouping::getFilesAndFolders(const QString& path) const noexcept
 {
-	QMap<QString, qint64> filesAndFoldersList;
+	QMap<QString, double> filesAndFoldersList;
 
-	for (const auto& it : QDir(path).entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Hidden, QDir::Name | QDir::Type))
+	if (QFileInfo(path).isDir())
 	{
-		const auto absolutePath = it.absoluteFilePath();
-		filesAndFoldersList.insert(absolutePath, Configuration::GetTotalSize(absolutePath));
+		for (const auto& it : QDir(path).entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Hidden | QDir::AllEntries, QDir::Name | QDir::Type))
+		{
+			const auto absolutePath = it.absoluteFilePath();
+			filesAndFoldersList.insert(absolutePath, Configuration::GetTotalSize(absolutePath));
+		}
 	}
+	else
+		filesAndFoldersList.insert(path, QFileInfo(path).size());
 
 	return filesAndFoldersList;
 }
 
-QMap<QString, double> FolderGrouping::getInformationByFoldersPercentageOfTotal(const qint64& totalSize, const QMap<QString, qint64>& filesAndFoldersList) const noexcept
+QMap<QString, double> FolderGrouping::getInformationByFoldersPercentageOfTotal(const qint64& totalSize, const QMap<QString, double>& filesAndFoldersList) const noexcept
 {
 	QMap<QString, double> filesAndFoldersListPercentage;
 
