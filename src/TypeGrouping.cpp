@@ -41,7 +41,9 @@ QMap<QString, double> TypeGrouping::getInformationByTypePercentageOfTotal(const 
 	for (auto it = filesAndFoldersList.begin(); it != filesAndFoldersList.end(); ++it)
 	{
 		const auto percentageOfTotal = double(it.value() * 100) / totalSize;
-		const auto suffix = QFileInfo(it.key()).suffix();
+		auto suffix = QFileInfo(it.key()).suffix();
+		if (suffix.isEmpty())
+			suffix = "unknown";
 		filesAndFoldersListPercentage.insert(suffix, filesAndFoldersListPercentage[suffix] + percentageOfTotal);
 	}
 

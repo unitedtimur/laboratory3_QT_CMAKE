@@ -10,6 +10,6 @@ public:
 	bool explorer(const QString& path) override;
 
 private:
-	QMap<QString, qint64> getFilesAndFolders(const QString& path) const noexcept;
-	QMap<QString, double> getInformationByFoldersPercentageOfTotal(const qint64& totalSize, const QMap<QString, qint64>& filesAndFoldersList) const noexcept;
+	QMap<QString, double> getFilesAndFolders(const QString& path) const noexcept;
+	QMap<QString, double> getInformationByFoldersPercentageOfTotal(const qint64& totalSize, const QMap<QString, double>& filesAndFoldersList) const noexcept;
 };
