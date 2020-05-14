@@ -1,7 +1,8 @@
-#pragma once
+﻿#pragma once
 
 #include "include/TypeGrouping.h"
 
+// Аналогичный TypeGrouping ( тестовый класс )
 class TypeGroupingTest : public TypeGrouping
 {
 public:

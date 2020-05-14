@@ -1,7 +1,8 @@
-#pragma once
+﻿#pragma once
 
 #include "include/FolderGrouping.h"
 
+// Аналогичный FolderGrouping ( тестовый класс )
 class FolderGroupingTest final : public FolderGrouping
 {
 public:
