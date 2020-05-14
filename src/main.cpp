@@ -1,10 +1,15 @@
-#include "include/StrategyManagement.h"
+﻿#include "include/StrategyManagement.h"
 #include "include/FolderGrouping.h"
 #include "include/TypeGrouping.h"
 #include <QApplication>
 #include <QDir>
 #include <QTextStream>
 #include <QDebug>
+
+#include "include/ConfigurationTest.h"
+#include "include/FolderGroupingTest.h"
+#include "include/TypeGroupingTest.h"
+
 int main(int argc, char* argv[])
 {
 	QApplication a(argc, argv);
@@ -19,6 +24,11 @@ int main(int argc, char* argv[])
 	strategyManagement->doIt(QDir::currentPath());
 
 	delete strategyManagement;
+
+	// Запускаются тесты
+	ConfugurationTest configurationTest;
+	FolderGroupingTest folderGroupingTest; 
+	TypeGroupingTest typeGrupingTest;
 
 	return QApplication::exec();
 }

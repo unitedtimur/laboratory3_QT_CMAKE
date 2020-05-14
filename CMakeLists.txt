@@ -24,6 +24,7 @@ set(project_headers
 	include/StrategyManagement.h
 	include/FolderGroupingTest.h
 	include/TypeGroupingTest.h
+	include/ConfigurationTest.h
 )
 
 set(project_sources 
@@ -33,6 +34,11 @@ set(project_sources
 	src/StrategyManagement.cpp
 	src/FolderGroupingTest.cpp
 	src/TypeGroupingTest.cpp
+	src/ConfigurationTest.cpp
+)
+
+set(project_resources
+	src/resource.qrc
 )
 
 add_executable(${PROJECT_NAME}
