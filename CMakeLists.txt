@@ -13,6 +13,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
 
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(project_headers 
@@ -21,6 +22,9 @@ set(project_headers
 	include/FolderGrouping.h
 	include/TypeGrouping.h
 	include/StrategyManagement.h
+	include/FolderGroupingTest.h
+	include/TypeGroupingTest.h
+	include/ConfigurationTest.h
 )
 
 set(project_sources 
@@ -28,6 +32,13 @@ set(project_sources
 	src/FolderGrouping.cpp
 	src/TypeGrouping.cpp
 	src/StrategyManagement.cpp
+	src/FolderGroupingTest.cpp
+	src/TypeGroupingTest.cpp
+	src/ConfigurationTest.cpp
+)
+
+set(project_resources
+	src/resource.qrc
 )
 
 add_executable(${PROJECT_NAME}
