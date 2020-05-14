@@ -3,6 +3,7 @@
 
 FolderGroupingTest::FolderGroupingTest()
 {
+	// Вызываем все тесты
 	this->explorerTest();
 	this->getFilesAndFoldersTest();
 	this->getInformationByFoldersPercentageOfTotalTest();

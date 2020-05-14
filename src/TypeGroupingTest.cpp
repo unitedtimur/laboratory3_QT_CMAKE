@@ -3,6 +3,7 @@
 
 TypeGroupingTest::TypeGroupingTest()
 {
+	// Вызываем все тесты
 	this->explorerTest();
 	this->setMapTest();
 	this->getAllFilesTest();
