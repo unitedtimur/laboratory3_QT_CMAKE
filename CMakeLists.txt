@@ -9,15 +9,20 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 #Чтобы найти пакеты Qt5
-#set(CMAKE_PREFIX_PATH "C:\\Qt\\5.14.2\\mingw73_64")
+set(CMAKE_PREFIX_PATH "C:\\Qt\\5.14.2\\msvc2017_64")
 
-find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Core Gui Widgets Charts REQUIRED)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+set(project_ui
+	ui/Explorer.ui
+)
+
 set(project_headers 
 	include/AbstractStrategy.h
+	include/Explorer.h
 	include/Configuration.h
 	include/FolderGrouping.h
 	include/TypeGrouping.h
@@ -29,6 +34,7 @@ set(project_headers
 
 set(project_sources 
 	src/main.cpp
+	src/Explorer.cpp
 	src/FolderGrouping.cpp
 	src/TypeGrouping.cpp
 	src/StrategyManagement.cpp
@@ -41,7 +47,10 @@ set(project_resources
 	src/resource.qrc
 )
 
+qt5_wrap_ui(project_headers_wrapped ${project_ui})
+
 add_executable(${PROJECT_NAME}
+	${project_ui}
 	${project_headers}
 	${project_sources}
 )
@@ -51,4 +60,5 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Core
 	Qt5::Gui
 	Qt5::Widgets
+	Qt5::Charts
 )

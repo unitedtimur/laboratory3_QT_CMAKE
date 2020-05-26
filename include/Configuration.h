@@ -28,6 +28,6 @@ namespace Configuration
 		QTextStream cout(stdout);
 
 		for (auto it = filesAndFoldersList.begin(); it != filesAndFoldersList.end(); ++it)
-			cout << it.key() << " " << QString::number(it.value(), 'g', 4) << "%" << endl;
+			cout << it.key() << " " << it.value() << "%" << endl;
 	}
 }

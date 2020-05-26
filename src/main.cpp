@@ -4,6 +4,7 @@
 #include "include/ConfigurationTest.h"
 #include "include/FolderGroupingTest.h"
 #include "include/TypeGroupingTest.h"
+#include "include/Explorer.h"
 #include <QApplication>
 #include <QDir>
 
@@ -33,7 +34,9 @@ int main(int argc, char* argv[])
 	FolderGroupingTest folderGroupingTest; 
 	TypeGroupingTest typeGrupingTest;
 
-	// Пока не надо QApplication::exec();
+	// Окно главной формы
+	Explorer explorer;
+	explorer.show();
 
-	return getchar();
+	return QApplication::exec();
 }
