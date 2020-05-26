@@ -1,10 +1,10 @@
-﻿#include "include/StrategyManagement.h"
-#include "include/FolderGrouping.h"
-#include "include/TypeGrouping.h"
-#include "include/ConfigurationTest.h"
-#include "include/FolderGroupingTest.h"
-#include "include/TypeGroupingTest.h"
-#include "include/Explorer.h"
+﻿//#include "include/StrategyManagement.h"
+//#include "include/FolderGrouping.h"
+//#include "include/TypeGrouping.h"
+//#include "include/ConfigurationTest.h"
+//#include "include/FolderGroupingTest.h"
+//#include "include/TypeGroupingTest.h"
+//#include "include/Explorer.h"
 #include <QApplication>
 #include <QDir>
 
@@ -18,25 +18,27 @@ int main(int argc, char* argv[])
 #endif
 	
 	// Инициализируем управляющий класс и передаём туда стратегию для группировки по папкам
-	StrategyManagement* strategyManagement = new StrategyManagement(new FolderGrouping);
-	// Выполнение бизнес-логики
-	strategyManagement->doIt(QDir::currentPath());
-	// Выставление новое стратегии для группировки по типам
-	strategyManagement->setStrategy(new TypeGrouping);
-	// Выполнение бизнес-логики
-	strategyManagement->doIt(QDir::currentPath());
-
-	// Очищение памяти
-	delete strategyManagement;
-
-	// Запускаются тесты
-	ConfugurationTest configurationTest;
-	FolderGroupingTest folderGroupingTest; 
-	TypeGroupingTest typeGrupingTest;
+	//StrategyManagement* strategyManagement = new StrategyManagement(new FolderGrouping);
+	//// Выполнение бизнес-логики
+	//strategyManagement->doIt(QDir::currentPath());
+	//// Выставление новое стратегии для группировки по типам
+	//strategyManagement->setStrategy(new TypeGrouping);
+	//// Выполнение бизнес-логики
+	//strategyManagement->doIt(QDir::currentPath());
+	//
+	//// Очищение памяти
+	//delete strategyManagement;
+	//
+	//// Запускаются тесты
+	//ConfugurationTest configurationTest;
+	//FolderGroupingTest folderGroupingTest; 
+	//TypeGroupingTest typeGrupingTest;
 
 	// Окно главной формы
-	Explorer explorer;
-	explorer.show();
+	//Explorer explorer;
+	//explorer.show();
 
-	return QApplication::exec();
+	a.exec();
+
+	return 0;
 }
