@@ -18,6 +18,9 @@ bool FolderGrouping::explorer(const QString& path)
 	// Получаем информацию о файлах и / или папках в процентном соотношении
 	const auto filesAndFoldersListPercentage = this->getInformationByFoldersPercentageOfTotal(totalSize, filesAndFoldersList);
 	// Выводим информацию
+	if (filesAndFoldersListPercentage.empty())
+		QTextStream(stdout) << "FolderGrouping: This path is empty" << endl;
+
 	Configuration::PrintInformationPercentageOfTotal(filesAndFoldersListPercentage);
 
 	return true;

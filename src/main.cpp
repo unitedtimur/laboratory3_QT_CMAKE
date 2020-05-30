@@ -18,6 +18,7 @@ int main(int argc, char* argv[])
 	
 	// Инициализируем управляющий класс и передаём туда стратегию для группировки по папкам
 	StrategyManagement* strategyManagement = new StrategyManagement(new FolderGrouping);
+
 	// Выполнение бизнес-логики
 	strategyManagement->doIt(QDir::currentPath());
 	// Выставление новое стратегии для группировки по типам
@@ -29,9 +30,9 @@ int main(int argc, char* argv[])
 	delete strategyManagement;
 
 	// Запускаются тесты
-	ConfugurationTest configurationTest;
-	FolderGroupingTest folderGroupingTest; 
-	TypeGroupingTest typeGrupingTest;
+	// ConfugurationTest configurationTest;
+	// FolderGroupingTest folderGroupingTest; 
+	// TypeGroupingTest typeGrupingTest;
 
 	// Пока не надо QApplication::exec();
 
