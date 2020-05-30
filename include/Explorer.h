@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QWidget>
+#include <QItemSelection>
 
 namespace Ui
 {
@@ -19,6 +20,8 @@ public:
 
 protected:
 	void initModelDir();
+
+	Q_SLOT void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 
 private:
 	Ui::Explorer* ui;

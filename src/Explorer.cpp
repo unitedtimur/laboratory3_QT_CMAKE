@@ -2,6 +2,7 @@
 #include "ui_Explorer.h"
 
 #include <QFileSystemModel>
+#include <QItemSelectionModel>
 
 Explorer::Explorer(QWidget* parent) :
 	QWidget(parent),
@@ -12,15 +13,8 @@ Explorer::Explorer(QWidget* parent) :
 
 	this->setMinimumSize(1200, 600);
 	this->initModelDir();
-	_modelDir->setFilter(QDir::AllDirs | QDir::Files | QDir::NoDotAndDotDot);
-	_modelDir->setRootPath(QDir::currentPath());
-	ui->treeView->setModel(_modelDir);
 
-
-	//const auto modelFile = new QFileSystemModel(this);
-	//modelFile->setFilter(QDir::Files | QDir::NoDotAndDotDot);
-	//modelFile->setRootPath(QDir::currentPath());
-
+	connect(ui->treeView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &Explorer::selectionChanged);
 }
 
 Explorer::~Explorer()
@@ -31,5 +25,17 @@ Explorer::~Explorer()
 
 void Explorer::initModelDir()
 {
-	
+	_modelDir->setFilter(QDir::AllDirs | QDir::Files | QDir::NoDotAndDotDot);
+	_modelDir->setRootPath(QDir::currentPath());
+	ui->treeView->setModel(_modelDir);
+}
+
+void Explorer::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
+{
+	Q_UNUSED(deselected);
+
+	QModelIndexList indexes = selected.indexes();
+
+	//for (const auto& index : indexes)
+
 }
