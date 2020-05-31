@@ -15,11 +15,16 @@ bool TypeGrouping::explorer(const QString& path, QList<Data>& data)
 	// Вычисляем полный размер по переданному пути
 	const auto totalSize = Configuration::GetTotalSize(absolutePath);
 	// Получаем список всех файлов
-	const auto filesAndFoldersList = this->getAllFiles(absolutePath);
+	auto filesAndFoldersList = this->getAllFiles(absolutePath);
+
+	data.clear();
+
+	Configuration::FillInData(filesAndFoldersList, data);
+
 	// Получаем процентное соотношение типов относительно общего размера
-	const auto filesAndFoldersListPercentage = this->getInformationByTypePercentageOfTotal(totalSize, filesAndFoldersList);
-	// Выводим информацию
-	Configuration::PrintInformationPercentageOfTotal(filesAndFoldersListPercentage);
+	auto filesAndFoldersListPercentage = this->getInformationByTypePercentageOfTotal(totalSize, filesAndFoldersList);
+
+	Configuration::FillInDataPercentage(filesAndFoldersListPercentage, data);
 
 	return true;
 }

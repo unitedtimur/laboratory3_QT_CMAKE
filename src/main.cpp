@@ -38,7 +38,8 @@ int main(int argc, char* argv[])
 	Explorer explorer;
 	explorer.show();
 
-	QApplication::exec();
+	//QApplication::exec();
+	a.exec();
 
 	return 0;
 }

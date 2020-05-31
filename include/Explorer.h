@@ -11,6 +11,7 @@ namespace Ui
 
 class QFileSystemModel;
 class StrategyManagement;
+class QAbstractTableModel;
 
 class Explorer : public QWidget
 {
@@ -29,6 +30,8 @@ protected:
 
 
 	void initModelDir();
+	void setTableModel(QAbstractTableModel* model);
+	void expectAndDisplayTableModel();
 
 	Q_SLOT void selectionGrouping(const qint32& index);
 	Q_SLOT void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
@@ -39,4 +42,5 @@ private:
 	StrategyManagement* _strategyManagement;
 	ConditionGrouped _conditionGrouped;
 	QList<Data> _data;
+	QString _currentPath;
 };

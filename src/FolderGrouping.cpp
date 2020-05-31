@@ -14,26 +14,18 @@ bool FolderGrouping::explorer(const QString& path, QList<Data>& data)
 	// Получаем полный размер в байтах папки / файла по переданному пути
 	const auto totalSize = Configuration::GetTotalSize(absolutePath);
 	// Получаем файлы и / или папки
-	const auto filesAndFoldersList = this->getFilesAndFolders(absolutePath);
+	auto filesAndFoldersList = this->getFilesAndFolders(absolutePath);
 	
-	QList<Data> temp;
-	for (const auto& key : filesAndFoldersList.keys())
-		temp.push_back(Data(key, QString::number(filesAndFoldersList.value(key)), ""));
+	data.clear();
+
+	Configuration::FillInData(filesAndFoldersList, data);
 
 	// Получаем информацию о файлах и / или папках в процентном соотношении
-	const auto filesAndFoldersListPercentage = this->getInformationByFoldersPercentageOfTotal(totalSize, filesAndFoldersList);
+	auto filesAndFoldersListPercentage = this->getInformationByFoldersPercentageOfTotal(totalSize, filesAndFoldersList);
 	
-	qint32 i = 0; 
-	for (const auto& key : filesAndFoldersListPercentage.keys())
-	{
-		temp[i] = Data(temp[i]._name, temp[i]._size, QString::number(filesAndFoldersListPercentage.value(key)));
-		++i;
-	}
+	Configuration::FillInDataPercentage(filesAndFoldersListPercentage, data);
 
-	data = temp;
-
-	// Выводим информацию
-	//Configuration::PrintInformationPercentageOfTotal(filesAndFoldersListPercentage);
+	// TODO замутить отбросов
 
 	return true;
 }
@@ -45,7 +37,7 @@ QMap<QString, double> FolderGrouping::getFilesAndFolders(const QString& path) co
 	// Проходимся по всему подкаталогам в поисках файлов / папок и вычисляем размер
 	if (QFileInfo(path).isDir())
 	{
-		for (const auto& it : QDir(path).entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Hidden | QDir::AllEntries, QDir::Name | QDir::Type))
+		for (const auto& it : QDir(path).entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::NoDot | QDir::Hidden | QDir::AllEntries, QDir::Name | QDir::Type))
 		{
 			const auto absolutePath = it.absoluteFilePath();
 			filesAndFoldersList.insert(absolutePath, Configuration::GetTotalSize(absolutePath));

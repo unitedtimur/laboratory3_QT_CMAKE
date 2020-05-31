@@ -32,4 +32,22 @@ namespace Configuration
 		for (auto it = filesAndFoldersList.begin(); it != filesAndFoldersList.end(); ++it)
 			cout << it.key() << " " << it.value() << "%" << endl;
 	}
+
+	template<class T>
+	inline static void FillInData(QMap<QString, T>& filesAndFoldersList, QList<Data>& data)
+	{
+		for (const auto& key : filesAndFoldersList.keys())
+			data.push_back(Data(key, QString::number(filesAndFoldersList.value(key)), ""));
+	}
+
+	template<class T>
+	inline static void FillInDataPercentage(QMap<QString, T>& filesAndFoldersListPercentage, QList<Data>& data)
+	{
+		qint32 i = 0;
+		for (const auto& key : filesAndFoldersListPercentage.keys())
+		{
+			data[i] = Data(data[i]._name, data[i]._size, QString::number(filesAndFoldersListPercentage.value(key)));
+			++i;
+		}
+	}
 }
