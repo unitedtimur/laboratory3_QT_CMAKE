@@ -22,12 +22,14 @@ set(project_ui
 
 set(project_headers 
 	include/AbstractStrategy.h
+	include/Data.h
 	include/Explorer.h
 	include/Configuration.h
 	include/FolderGrouping.h
 	include/TypeGrouping.h
 	include/StrategyManagement.h
 	include/FolderGroupingTest.h
+	include/FileBrowserModel.h
 	include/TypeGroupingTest.h
 	include/ConfigurationTest.h
 )
@@ -39,6 +41,7 @@ set(project_sources
 	src/TypeGrouping.cpp
 	src/StrategyManagement.cpp
 	src/FolderGroupingTest.cpp
+	src/FileBrowserModel.cpp
 	src/TypeGroupingTest.cpp
 	src/ConfigurationTest.cpp
 )

@@ -1,7 +1,7 @@
 ﻿#include "include/FolderGrouping.h"
 #include "include/Configuration.h"
 
-bool FolderGrouping::explorer(const QString& path)
+bool FolderGrouping::explorer(const QString& path, QList<Data>& data)
 {
 	// Открываем файл и проверяем, что он читабельный
 	QFileInfo file(path);
@@ -15,10 +15,25 @@ bool FolderGrouping::explorer(const QString& path)
 	const auto totalSize = Configuration::GetTotalSize(absolutePath);
 	// Получаем файлы и / или папки
 	const auto filesAndFoldersList = this->getFilesAndFolders(absolutePath);
+	
+	QList<Data> temp;
+	for (const auto& key : filesAndFoldersList.keys())
+		temp.push_back(Data(key, QString::number(filesAndFoldersList.value(key)), ""));
+
 	// Получаем информацию о файлах и / или папках в процентном соотношении
 	const auto filesAndFoldersListPercentage = this->getInformationByFoldersPercentageOfTotal(totalSize, filesAndFoldersList);
+	
+	qint32 i = 0; 
+	for (const auto& key : filesAndFoldersListPercentage.keys())
+	{
+		temp[i] = Data(temp[i]._name, temp[i]._size, QString::number(filesAndFoldersListPercentage.value(key)));
+		++i;
+	}
+
+	data = temp;
+
 	// Выводим информацию
-	Configuration::PrintInformationPercentageOfTotal(filesAndFoldersListPercentage);
+	//Configuration::PrintInformationPercentageOfTotal(filesAndFoldersListPercentage);
 
 	return true;
 }

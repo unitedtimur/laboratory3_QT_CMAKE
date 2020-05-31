@@ -2,6 +2,7 @@
 
 #include <QWidget>
 #include <QItemSelection>
+#include "include/Data.h"
 
 namespace Ui
 {
@@ -9,6 +10,7 @@ namespace Ui
 }
 
 class QFileSystemModel;
+class StrategyManagement;
 
 class Explorer : public QWidget
 {
@@ -19,11 +21,22 @@ public:
 	~Explorer();
 
 protected:
+	enum class ConditionGrouped
+	{
+		byFolders	= 0x01,
+		byTypes		= 0x02
+	};
+
+
 	void initModelDir();
 
+	Q_SLOT void selectionGrouping(const qint32& index);
 	Q_SLOT void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 
 private:
 	Ui::Explorer* ui;
 	QFileSystemModel* _modelDir;
+	StrategyManagement* _strategyManagement;
+	ConditionGrouped _conditionGrouped;
+	QList<Data> _data;
 };

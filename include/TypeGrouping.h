@@ -10,7 +10,7 @@ public:
 	explicit TypeGrouping() = default;
 	virtual ~TypeGrouping() override = default;
 	// Основная доступная функция
-	bool explorer(const QString& path) override;
+	bool explorer(const QString& path, QList<Data>& data) override;
 
 protected:
 	// Функция копирования QMap

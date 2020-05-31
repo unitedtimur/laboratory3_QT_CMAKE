@@ -6,6 +6,8 @@
 
 namespace Configuration
 {
+	static qint32 NUMBER_OF_COLUMNS = 0x03;
+
 	inline static qint64 GetTotalSize(const QString& path)
 	{
 		qint64 totalSize = 0;

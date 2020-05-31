@@ -10,7 +10,7 @@ public:
 	explicit FolderGrouping() = default;
 	virtual ~FolderGrouping() override = default;
 	// Основная доступная функция
-	bool explorer(const QString& path) override;
+	bool explorer(const QString& path, QList<Data>& data) override;
 
 protected:
 	// Функция возвращает переданные файлы или папки по переданному пути ( сгруппировав их )

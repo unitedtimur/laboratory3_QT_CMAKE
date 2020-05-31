@@ -18,16 +18,16 @@ int main(int argc, char* argv[])
 #endif
 	
 	// Инициализируем управляющий класс и передаём туда стратегию для группировки по папкам
-	StrategyManagement* strategyManagement = new StrategyManagement(new FolderGrouping);
-	// Выполнение бизнес-логики
-	strategyManagement->doIt(QDir::currentPath());
-	// Выставление новое стратегии для группировки по типам
-	strategyManagement->setStrategy(new TypeGrouping);
-	// Выполнение бизнес-логики
-	strategyManagement->doIt(QDir::currentPath());
-	
-	// Очищение памяти
-	delete strategyManagement;
+	//StrategyManagement* strategyManagement = new StrategyManagement(new FolderGrouping);
+	//// Выполнение бизнес-логики
+	//strategyManagement->doIt(QDir::currentPath(), QList<Data>());
+	//// Выставление новое стратегии для группировки по типам
+	//strategyManagement->setStrategy(new TypeGrouping);
+	//// Выполнение бизнес-логики
+	//strategyManagement->doIt(QDir::currentPath(), QList<Data>());
+	//
+	//// Очищение памяти
+	//delete strategyManagement;
 	
 	// Запускаются тесты
 	// ConfugurationTest configurationTest;
@@ -35,8 +35,8 @@ int main(int argc, char* argv[])
 	// TypeGroupingTest typeGrupingTest;
 
 	// Окно главной формы
-	//Explorer explorer;
-	//explorer.show();
+	Explorer explorer;
+	explorer.show();
 
 	QApplication::exec();
 

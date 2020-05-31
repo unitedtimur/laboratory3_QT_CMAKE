@@ -2,7 +2,7 @@
 #include "include/Configuration.h"
 #include <qdebug.h>
 
-bool TypeGrouping::explorer(const QString& path)
+bool TypeGrouping::explorer(const QString& path, QList<Data>& data)
 {
 	// Проверяем файл / папку на читабельность
 	QFileInfo file(path);
