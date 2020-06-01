@@ -4,6 +4,7 @@
 #include "include/ConfigurationTest.h"
 #include "include/FolderGroupingTest.h"
 #include "include/TypeGroupingTest.h"
+#include "include/Explorer.h"
 #include <QApplication>
 #include <QDir>
 
@@ -17,24 +18,28 @@ int main(int argc, char* argv[])
 #endif
 	
 	// Инициализируем управляющий класс и передаём туда стратегию для группировки по папкам
-	StrategyManagement* strategyManagement = new StrategyManagement(new FolderGrouping);
-
-	// Выполнение бизнес-логики
-	strategyManagement->doIt(QDir::currentPath());
-	// Выставление новое стратегии для группировки по типам
-	strategyManagement->setStrategy(new TypeGrouping);
-	// Выполнение бизнес-логики
-	strategyManagement->doIt(QDir::currentPath());
-
-	// Очищение памяти
-	delete strategyManagement;
-
+	//StrategyManagement* strategyManagement = new StrategyManagement(new FolderGrouping);
+	//// Выполнение бизнес-логики
+	//strategyManagement->doIt(QDir::currentPath(), QList<Data>());
+	//// Выставление новое стратегии для группировки по типам
+	//strategyManagement->setStrategy(new TypeGrouping);
+	//// Выполнение бизнес-логики
+	//strategyManagement->doIt(QDir::currentPath(), QList<Data>());
+	//
+	//// Очищение памяти
+	//delete strategyManagement;
+	
 	// Запускаются тесты
 	// ConfugurationTest configurationTest;
 	// FolderGroupingTest folderGroupingTest; 
 	// TypeGroupingTest typeGrupingTest;
 
-	// Пока не надо QApplication::exec();
+	// Окно главной формы
+	Explorer explorer;
+	explorer.show();
 
-	return getchar();
+	//QApplication::exec();
+	a.exec();
+
+	return 0;
 }
