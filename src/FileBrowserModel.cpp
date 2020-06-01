@@ -1,4 +1,4 @@
-#include "include/FileBrowserModel.h"
+﻿#include "include/FileBrowserModel.h"
 #include "include/Configuration.h"
 
 FileBrowserModel::FileBrowserModel(QObject* parent, const QList<Data>& data) :
@@ -46,14 +46,22 @@ QVariant FileBrowserModel::data(const QModelIndex& index, int role) const
 	}
 }
 
-void FileBrowserModel::setData(const QList<Data>& data)
+QVariant FileBrowserModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-	_data = data;
-}
+	if (role != Qt::DisplayRole)
+		return QVariant();
 
-bool FileBrowserModel::insertRows(int position, int rows, const QModelIndex& index)
-{
-	
+	if (orientation == Qt::Horizontal)
+	{
+		switch (section)
+		{
+		case 0x00: return QVariant(QString("Name"));
+		case 0x01: return QVariant(QString("Size"));
+		case 0x02: return QVariant(QString("Percentage"));
+		default: return QVariant();
+		}
+	}
 
-	return true;
+	return QVariant();
+
 }

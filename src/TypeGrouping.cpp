@@ -22,6 +22,9 @@ bool TypeGrouping::explorer(const QString& path, QList<Data>& data)
 	// Получаем процентное соотношение типов относительно общего размера
 	const auto filesAndFoldersListPercentage = this->getInformationByTypePercentageOfTotal(totalSize, filesAndFoldersList, data);
 
+	if (data.isEmpty() && QFileInfo(absolutePath).isFile())
+		data.push_back(Data(QFileInfo(absolutePath).suffix().isEmpty() ? "unknown" : QFileInfo(absolutePath).suffix(), QString::number(QFileInfo(absolutePath).size()), "100"));
+
 	return true;
 }
 

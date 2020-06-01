@@ -18,7 +18,6 @@ Explorer::Explorer(QWidget* parent) :
 	_conditionGrouped(ConditionGrouped::byFolders)
 {
 	ui->setupUi(this);
-
 	this->setMinimumSize(1200, 600);
 	this->initModelDir();
 
@@ -40,7 +39,6 @@ void Explorer::initModelDir()
 	_modelDir->setRootPath(QDir::currentPath());
 	ui->treeView->setModel(_modelDir);
 	ui->treeView->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
-	//ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 }
 
 void Explorer::setTableModel(QAbstractTableModel* model)
@@ -50,6 +48,9 @@ void Explorer::setTableModel(QAbstractTableModel* model)
 
 void Explorer::expectAndDisplayTableModel()
 {
+	if (_currentPath.isEmpty())
+		return;
+
 	switch (_conditionGrouped)
 	{
 	case Explorer::ConditionGrouped::byFolders:
@@ -57,6 +58,7 @@ void Explorer::expectAndDisplayTableModel()
 		_strategyManagement->setStrategy(new FolderGrouping);
 		_strategyManagement->doIt(_currentPath, _data);
 		const auto fileBrowserModel = new FileBrowserModel(nullptr, _data);
+		if (_data.isEmpty()) return;
 		this->setTableModel(fileBrowserModel);
 		break;
 	}
@@ -65,6 +67,7 @@ void Explorer::expectAndDisplayTableModel()
 		_strategyManagement->setStrategy(new TypeGrouping);
 		_strategyManagement->doIt(_currentPath, _data);
 		const auto fileBrowserModel = new FileBrowserModel(nullptr, _data);
+		if (_data.isEmpty()) return;
 		this->setTableModel(fileBrowserModel);
 		break;
 	}
@@ -73,12 +76,14 @@ void Explorer::expectAndDisplayTableModel()
 		_strategyManagement->setStrategy(new FolderGrouping);
 		_strategyManagement->doIt(_currentPath, _data);
 		const auto fileBrowserModel = new FileBrowserModel(nullptr, _data);
+		if (_data.isEmpty()) return;
 		this->setTableModel(fileBrowserModel);
 		break;
 	}
 	}
 
 	ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	ui->tableView->sortByColumn(0x02);
 }
 
 void Explorer::selectionGrouping(const qint32& index)
