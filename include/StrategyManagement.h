@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <QString>
+#include "include/Data.h"
 
 // Управляющий класс, который предоставляет функционал для клиентов
 class StrategyManagement
@@ -13,7 +14,7 @@ public:
 	// Функция позволяет выставлять новую стратегию для объекта
 	void setStrategy(class AbstractStrategy* strategy);
 	// Функция бизнес-логики
-	void doIt(const QString& path);
+	void doIt(const QString& path, QList<Data>& data);
 
 private:
 	// Поле интерфейса стратегии
