@@ -21,7 +21,7 @@ void StrategyManagement::setStrategy(AbstractStrategy* strategy)
 }
 
 // Выполняем функцию для стратегии с передаваемым аргументом ( explorer() )
-void StrategyManagement::doIt(const QString& path)
+void StrategyManagement::doIt(const QString& path, QList<Data>& data)
 {
-	_strategy->explorer(path);
+	_strategy->explorer(path, data);
 }

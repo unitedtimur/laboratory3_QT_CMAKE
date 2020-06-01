@@ -1,7 +1,7 @@
 ﻿#include "include/FolderGrouping.h"
 #include "include/Configuration.h"
 
-bool FolderGrouping::explorer(const QString& path)
+bool FolderGrouping::explorer(const QString& path, QList<Data>& data)
 {
 	// Открываем файл и проверяем, что он читабельный
 	QFileInfo file(path);
@@ -14,11 +14,16 @@ bool FolderGrouping::explorer(const QString& path)
 	// Получаем полный размер в байтах папки / файла по переданному пути
 	const auto totalSize = Configuration::GetTotalSize(absolutePath);
 	// Получаем файлы и / или папки
-	const auto filesAndFoldersList = this->getFilesAndFolders(absolutePath);
+	auto filesAndFoldersList = this->getFilesAndFolders(absolutePath);
+	
+	data.clear();
+
+	Configuration::FillInData(filesAndFoldersList, data);
+
 	// Получаем информацию о файлах и / или папках в процентном соотношении
-	const auto filesAndFoldersListPercentage = this->getInformationByFoldersPercentageOfTotal(totalSize, filesAndFoldersList);
-	// Выводим информацию
-	Configuration::PrintInformationPercentageOfTotal(filesAndFoldersListPercentage);
+	auto filesAndFoldersListPercentage = this->getInformationByFoldersPercentageOfTotal(totalSize, filesAndFoldersList);
+	
+	Configuration::FillInDataPercentage(filesAndFoldersListPercentage, data);
 
 	return true;
 }
@@ -30,7 +35,7 @@ QMap<QString, double> FolderGrouping::getFilesAndFolders(const QString& path) co
 	// Проходимся по всему подкаталогам в поисках файлов / папок и вычисляем размер
 	if (QFileInfo(path).isDir())
 	{
-		for (const auto& it : QDir(path).entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Hidden | QDir::AllEntries, QDir::Name | QDir::Type))
+		for (const auto& it : QDir(path).entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::NoDot | QDir::Hidden | QDir::AllEntries, QDir::Name | QDir::Type))
 		{
 			const auto absolutePath = it.absoluteFilePath();
 			filesAndFoldersList.insert(absolutePath, Configuration::GetTotalSize(absolutePath));

@@ -6,6 +6,8 @@
 
 namespace Configuration
 {
+	static qint32 NUMBER_OF_COLUMNS = 0x03;
+
 	inline static qint64 GetTotalSize(const QString& path)
 	{
 		qint64 totalSize = 0;
@@ -28,6 +30,24 @@ namespace Configuration
 		QTextStream cout(stdout);
 
 		for (auto it = filesAndFoldersList.begin(); it != filesAndFoldersList.end(); ++it)
-			cout << it.key() << " " << QString::number(it.value(), 'g', 4) << "%" << endl;
+			cout << it.key() << " " << it.value() << "%" << endl;
+	}
+
+	template<class T>
+	inline static void FillInData(QMap<QString, T>& filesAndFoldersList, QList<Data>& data)
+	{
+		for (const auto& key : filesAndFoldersList.keys())
+			data.push_back(Data(key, QString::number(filesAndFoldersList.value(key)), ""));
+	}
+
+	template<class T>
+	inline static void FillInDataPercentage(QMap<QString, T>& filesAndFoldersListPercentage, QList<Data>& data)
+	{
+		qint32 i = 0;
+		for (const auto& key : filesAndFoldersListPercentage.keys())
+		{
+			data[i] = Data(data[i]._name, data[i]._size, QString::number(filesAndFoldersListPercentage.value(key)));
+			++i;
+		}
 	}
 }
