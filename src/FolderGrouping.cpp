@@ -25,8 +25,6 @@ bool FolderGrouping::explorer(const QString& path, QList<Data>& data)
 	
 	Configuration::FillInDataPercentage(filesAndFoldersListPercentage, data);
 
-	// TODO замутить отбросов
-
 	return true;
 }
 

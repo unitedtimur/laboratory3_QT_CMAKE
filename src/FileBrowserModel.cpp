@@ -26,9 +26,22 @@ QVariant FileBrowserModel::data(const QModelIndex& index, int role) const
 
 	switch (index.column())
 	{
-		case 0x00: return _data[index.row()]._name;
-		case 0x01: return _data[index.row()]._size;
-		case 0x02: return _data[index.row()]._percentage;
+		case 0x00: return QStringList(_data[index.row()]._name.split("/")).last();
+		
+		case 0x01: 
+		{
+			QLocale locale(QLocale::English);
+			return locale.formattedDataSize(_data[index.row()]._size.toDouble());
+		}
+		case 0x02: 
+		{
+			if (_data[index.row()]._size.toDouble() >= 0 && _data[index.row()]._percentage.toDouble() < 0.01)
+			{
+				return QString(" < 0.01%");
+			}
+
+			return QString::number(_data[index.row()]._percentage.toDouble(), 'g', 4) + " %";
+		}
 		default: return QVariant();
 	}
 }

@@ -18,5 +18,5 @@ protected:
 	// Функция возвращает все файлы
 	QMap<QString, qint64> getAllFiles(const QString& path) noexcept;
 	// Функция возвращает информацию о типах в процентном соотношении от общего размера
-	QMap<QString, double> getInformationByTypePercentageOfTotal(const qint64& totalSize, const QMap<QString, qint64>& filesAndFoldersList) const noexcept;
+	QMap<QString, double> getInformationByTypePercentageOfTotal(const qint64& totalSize, const QMap<QString, qint64>& filesAndFoldersList, QList<Data>& data) const noexcept;
 };

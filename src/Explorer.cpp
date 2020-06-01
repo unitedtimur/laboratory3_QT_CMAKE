@@ -24,6 +24,7 @@ Explorer::Explorer(QWidget* parent) :
 
 	connect(ui->groupedBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Explorer::selectionGrouping);
 	connect(ui->treeView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &Explorer::selectionChanged);
+
 }
 
 Explorer::~Explorer()
@@ -39,6 +40,7 @@ void Explorer::initModelDir()
 	_modelDir->setRootPath(QDir::currentPath());
 	ui->treeView->setModel(_modelDir);
 	ui->treeView->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+	//ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 }
 
 void Explorer::setTableModel(QAbstractTableModel* model)
@@ -76,7 +78,7 @@ void Explorer::expectAndDisplayTableModel()
 	}
 	}
 
-	ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+	ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 void Explorer::selectionGrouping(const qint32& index)
