@@ -40,6 +40,9 @@ QMap<QString, qint64> TypeGrouping::getAllFiles(const QString& path) noexcept
 	QMap<QString, qint64> fileList;
 
 	// Проходимся по всем файлам и достаём размер файлов
+	//for (const auto& it : QDir(path).entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Hidden, QDir::Name | QDir::Type))
+	//	(it.isDir() && !it.isSymLink()) ? this->setMap(this->getAllFiles(it.absoluteFilePath()), fileList) : fileList.insert(it.absoluteFilePath(), it.size());
+	
 	for (const auto& it : QDir(path).entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Hidden, QDir::Name | QDir::Type))
 		if (it.isDir() && !it.isSymLink())
 			this->setMap(this->getAllFiles(it.absoluteFilePath()), fileList);
