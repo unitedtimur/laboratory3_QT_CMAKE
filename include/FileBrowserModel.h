@@ -4,6 +4,7 @@
 #include <QList>
 #include "include/Data.h"
 
+// Своя tableModel
 class FileBrowserModel final : public QAbstractTableModel
 {
 	Q_OBJECT 

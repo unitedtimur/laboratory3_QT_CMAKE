@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QWidget>
 #include <QItemSelection>
@@ -14,6 +14,7 @@ class StrategyManagement;
 class QAbstractTableModel;
 class ChartWidget;
 
+// Класс делегат или же класс, занимающий функционалом для работы с моделью данных и отображения диаграмм
 class Explorer : public QWidget
 {
 	Q_OBJECT
@@ -23,6 +24,7 @@ public:
 	~Explorer();
 
 protected:
+	// Перечесления (флаги) для выбора пользователя отображения модели и отрисовки диаграмм
 	enum class ConditionGrouped
 	{
 		byFolders		= 0x01,
