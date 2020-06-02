@@ -12,6 +12,7 @@ namespace Ui
 class QFileSystemModel;
 class StrategyManagement;
 class QAbstractTableModel;
+class ChartWidget;
 
 class Explorer : public QWidget
 {
@@ -24,14 +25,15 @@ public:
 protected:
 	enum class ConditionGrouped
 	{
-		byFolders	= 0x01,
-		byTypes		= 0x02
+		byFolders		= 0x01,
+		byTypes			= 0x02
 	};
 
 	enum class ConditionDisplayed
 	{
-		byBar		= 0x01,
-		byPie		= 0x02
+		byBar			= 0x01,
+		byPie			= 0x02,
+		byStackedBar	= 0x03
 	};
 
 	void initModelDir();
