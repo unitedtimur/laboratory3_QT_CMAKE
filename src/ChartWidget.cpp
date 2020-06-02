@@ -16,26 +16,37 @@ ChartWidget::ChartWidget(QWidget* parent, const QList<Data>& data) :
 	this->convertData();
 }
 
+// Метод для построения bar диаграммы
 QChart* ChartWidget::dataBarChart()
 {
 	const auto chart = new QChart;
 	const auto series = new QBarSeries;
 
+	// Проходим по всем данным
 	for (const auto& it : _data)
 	{
+		// Выбираем имена и процентное соотношение
 		const auto label = it._name + " - (" + QString::number(it._percentage.toDouble(), 'g', 3) + ")%";
+		// Создаём set
 		const auto set = new QBarSet(label);
+		// Заполняем значениями (процентными соотношениями)
 		set->append(it._percentage.toDouble());
+		// Добавляем в серию
 		series->append(set);
 	}
 
+	// Добавляем серию в QChart
 	chart->addSeries(series);
+	// Выставляем тему 
 	chart->setTheme(QChart::ChartTheme::ChartThemeQt);
+	// Говорим отображать легенду справа
 	chart->legend()->setAlignment(Qt::AlignRight);
 
+	// Возвращаем QChart
 	return chart;
 }
 
+// Аналогично как и bar chart (только здесь не set, а slice)
 QtCharts::QChart* ChartWidget::dataPieChart()
 {
 	const auto chart = new QChart;
@@ -56,6 +67,7 @@ QtCharts::QChart* ChartWidget::dataPieChart()
 	return chart;
 }
 
+// Аналогично как и bar chart
 QtCharts::QChart* ChartWidget::dataStackedBarChart()
 {
 	const auto chart = new QChart;
@@ -101,6 +113,7 @@ void ChartWidget::convertData()
 
 	_data.clear();
 
+	// Заполнение данных с сгруппированным блоком others
 	for (const auto& it : sorting.keys())
 	{
 		const auto value = sorting.value(it);
