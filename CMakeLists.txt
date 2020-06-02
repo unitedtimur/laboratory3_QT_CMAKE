@@ -22,28 +22,24 @@ set(project_ui
 
 set(project_headers 
 	include/AbstractStrategy.h
+	include/ChartWidget.h
 	include/Data.h
 	include/Explorer.h
 	include/Configuration.h
 	include/FolderGrouping.h
 	include/TypeGrouping.h
 	include/StrategyManagement.h
-	include/FolderGroupingTest.h
 	include/FileBrowserModel.h
-	include/TypeGroupingTest.h
-	include/ConfigurationTest.h
 )
 
 set(project_sources 
 	src/main.cpp
+	src/ChartWidget.cpp
 	src/Explorer.cpp
 	src/FolderGrouping.cpp
 	src/TypeGrouping.cpp
 	src/StrategyManagement.cpp
-	src/FolderGroupingTest.cpp
 	src/FileBrowserModel.cpp
-	src/TypeGroupingTest.cpp
-	src/ConfigurationTest.cpp
 )
 
 set(project_resources
@@ -52,7 +48,16 @@ set(project_resources
 
 qt5_wrap_ui(project_headers_wrapped ${project_ui})
 
-add_executable(${PROJECT_NAME}
+# Устанавливаем режим работы приложения для Windows
+IF(WIN32)
+	SET(GUI_TYPE WIN32)
+ENDIF(WIN32)
+# Устанавливаем режим работы приложения для MacOS
+IF (APPLE)
+	SET(GUI_TYPE MACOSX_BUNDLE)
+ENDIF (APPLE)
+
+add_executable(${PROJECT_NAME} ${GUI_TYPE}
 	${project_ui}
 	${project_headers}
 	${project_sources}
