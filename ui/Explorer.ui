@@ -36,12 +36,17 @@
         <widget class="QComboBox" name="displayBox">
          <item>
           <property name="text">
+           <string>Display in bar</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
            <string>Display in pie</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Display in bar</string>
+           <string>Display in stacked bar</string>
           </property>
          </item>
         </widget>
@@ -73,7 +78,7 @@
         <widget class="QTableView" name="tableView"/>
        </item>
        <item>
-        <widget class="QWidget" name="widget" native="true"/>
+        <widget class="QChartView" name="chartView"/>
        </item>
        <item>
         <layout class="QVBoxLayout" name="chartLayout"/>
@@ -84,6 +89,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header>QtCharts</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

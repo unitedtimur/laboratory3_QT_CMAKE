@@ -22,6 +22,7 @@ set(project_ui
 
 set(project_headers 
 	include/AbstractStrategy.h
+	include/ChartWidget.h
 	include/Data.h
 	include/Explorer.h
 	include/Configuration.h
@@ -33,6 +34,7 @@ set(project_headers
 
 set(project_sources 
 	src/main.cpp
+	src/ChartWidget.cpp
 	src/Explorer.cpp
 	src/FolderGrouping.cpp
 	src/TypeGrouping.cpp
