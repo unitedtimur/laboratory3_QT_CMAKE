@@ -1,18 +1,17 @@
 ﻿#include "include/Explorer.h"
 #include "ui_Explorer.h"
 
-#include <QFileSystemModel>
-#include <QItemSelectionModel>
-#include <QAbstractTableModel>
 #include "include/StrategyManagement.h"
 #include "include/FolderGrouping.h"
 #include "include/TypeGrouping.h"
 #include "include/FileBrowserModel.h"
-#include <QDebug>
+#include "include/ChartWidget.h"
+#include <QFileSystemModel>
+#include <QItemSelectionModel>
+#include <QAbstractTableModel>
 #include <QChartView>
 #include <QBarSet>
 #include <QBarSeries>
-#include "include/ChartWidget.h"
 
 Explorer::Explorer(QWidget* parent) :
 	QWidget(parent),
