@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QWidget>
 #include <QItemSelection>
@@ -12,7 +12,9 @@ namespace Ui
 class QFileSystemModel;
 class StrategyManagement;
 class QAbstractTableModel;
+class ChartWidget;
 
+// Класс делегат или же класс, занимающий функционалом для работы с моделью данных и отображения диаграмм
 class Explorer : public QWidget
 {
 	Q_OBJECT
@@ -22,25 +24,35 @@ public:
 	~Explorer();
 
 protected:
+	// Перечесления (флаги) для выбора пользователя отображения модели и отрисовки диаграмм
 	enum class ConditionGrouped
 	{
-		byFolders	= 0x01,
-		byTypes		= 0x02
+		byFolders		= 0x01,
+		byTypes			= 0x02
 	};
 
+	enum class ConditionDisplayed
+	{
+		byBar			= 0x01,
+		byPie			= 0x02,
+		byStackedBar	= 0x03
+	};
 
 	void initModelDir();
 	void setTableModel(QAbstractTableModel* model);
 	void expectAndDisplayTableModel();
+	void expectAndDisplayChartWidget();
 
 	Q_SLOT void selectionGrouping(const qint32& index);
+	Q_SLOT void selectionDisplaying(const qint32& index);
 	Q_SLOT void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 
 private:
-	Ui::Explorer* ui;
-	QFileSystemModel* _modelDir;
+	Ui::Explorer*		ui;
+	QFileSystemModel*	_modelDir;
 	StrategyManagement* _strategyManagement;
-	ConditionGrouped _conditionGrouped;
-	QList<Data> _data;
-	QString _currentPath;
+	ConditionGrouped	_conditionGrouped;
+	ConditionDisplayed	_conditionDisplayed;
+	QList<Data>			_data;
+	QString				_currentPath;
 };
