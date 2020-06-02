@@ -48,7 +48,16 @@ set(project_resources
 
 qt5_wrap_ui(project_headers_wrapped ${project_ui})
 
-add_executable(${PROJECT_NAME}
+# Устанавливаем режим работы приложения для Windows
+IF(WIN32)
+	SET(GUI_TYPE WIN32)
+ENDIF(WIN32)
+# Устанавливаем режим работы приложения для MacOS
+IF (APPLE)
+	SET(GUI_TYPE MACOSX_BUNDLE)
+ENDIF (APPLE)
+
+add_executable(${PROJECT_NAME} ${GUI_TYPE}
 	${project_ui}
 	${project_headers}
 	${project_sources}
