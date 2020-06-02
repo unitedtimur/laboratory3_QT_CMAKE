@@ -28,10 +28,7 @@ set(project_headers
 	include/FolderGrouping.h
 	include/TypeGrouping.h
 	include/StrategyManagement.h
-	include/FolderGroupingTest.h
 	include/FileBrowserModel.h
-	include/TypeGroupingTest.h
-	include/ConfigurationTest.h
 )
 
 set(project_sources 
@@ -40,10 +37,7 @@ set(project_sources
 	src/FolderGrouping.cpp
 	src/TypeGrouping.cpp
 	src/StrategyManagement.cpp
-	src/FolderGroupingTest.cpp
 	src/FileBrowserModel.cpp
-	src/TypeGroupingTest.cpp
-	src/ConfigurationTest.cpp
 )
 
 set(project_resources

@@ -1,9 +1,6 @@
 ﻿#include "include/StrategyManagement.h"
 #include "include/FolderGrouping.h"
 #include "include/TypeGrouping.h"
-#include "include/ConfigurationTest.h"
-#include "include/FolderGroupingTest.h"
-#include "include/TypeGroupingTest.h"
 #include "include/Explorer.h"
 #include <QApplication>
 #include <QDir>
